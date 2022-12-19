@@ -31,12 +31,12 @@
     					<td th:text="${student.surname}"></td>
     					<td th:text="${student.age}"></td>
     					<td>
-    						<a th:href="@{'/Del'(name=${student.name},surname=${student.surname})}">
+    						<a th:href="@{'ListStudent/Del'(name=${student.name},surname=${student.surname})}">
     							<button>Delete Student</button>
     						</a>
     					</td>
     					<td>
-    						<a th:href="@{'/Mod'(name=${student.name},surname=${student.surname})}">
+    						<a th:href="@{'ListStudent/Mod'(name=${student.name},surname=${student.surname})}">
     							<button>Modify Student</button>
     						</a>
     					</td>

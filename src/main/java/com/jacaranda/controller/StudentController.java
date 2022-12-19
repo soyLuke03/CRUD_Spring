@@ -3,6 +3,7 @@ package com.jacaranda.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,8 +50,23 @@ public class StudentController {
 
 	
 	@GetMapping("ListStudent/Mod")
-	public String modStudent(Model model) {
+	public String modStudent(Model model, 
+			@RequestParam(name="name") String name,
+			@RequestParam(name="surname") String surname){
+	
+		Student estudiante = repositorio.getStudent(name, surname);
+		
+		
+		model.addAttribute("student",estudiante);
+	
 		return "modStudent";
+	}
+	
+	@PostMapping("ListStudent/Mod/Submit")
+	public String modStudentSubmit(@ModelAttribute("student") Student newStudent) {
+		
+		repositorio.updateStudent(newStudent.getName(), newStudent.getSurname(), newStudent.getAge());
+		return "redirect:/ListStudent";
 	}
 	
 	
@@ -65,7 +81,7 @@ public class StudentController {
 	}
 	
 	@PostMapping("ListStudent/Add/Submit")
-	public String addStudentSubmit(@ModelAttribute("student") Student newStudent) {
+	public String addStudentSubmit(@Validated @ModelAttribute("student") Student newStudent) {
 		
 		repositorio.addStudents(newStudent);
 		return "redirect:/ListStudent";

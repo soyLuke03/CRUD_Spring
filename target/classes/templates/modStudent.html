@@ -24,18 +24,20 @@
     				</tr>
     			</thead>
     			<tbody>
-    			<form action="#" th:action="@{/ListStudent}" th:object="${student}" method="post">
+   			<tbody>
+    			<form action="#" th:action="@{/ListStudent/Mod/Submit}" th:object="${student}" method="post">
     				<tr>
     					<td>
-    						<input name="name" id="name" type="text">
+    						<input th:value="${student.name}" th:field="*{name}" name="name" id="name" type="text">
     					</td>
     					<td>
-    						<input name="surname" id="surname" type="text">
+    						<input th:value="${student.surname}" th:field="*{surname}" name="surname" id="surname" type="text">
     					</td>
     					<td>
-    						<input name="age" id="age" type="number">
+    						<input th:value="${student.age}" th:field="*{age}" name="age" id="age" type="number">
     					</td>
     				</tr>
+    				<input type="submit">
     			</form>
     			</tbody>
     		
